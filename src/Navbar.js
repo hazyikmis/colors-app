@@ -3,6 +3,9 @@ import React, { Component } from "react";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+
 import "./Navbar.css";
 
 export default class Navbar extends Component {
@@ -39,6 +42,13 @@ export default class Navbar extends Component {
               }}
             />
           </div>
+        </div>
+        <div className="select-container">
+          <Select>
+            <MenuItem value="hex">HEX - #ffffff</MenuItem>
+            <MenuItem value="rgb">RGB - rgb(255,255,255)</MenuItem>
+            <MenuItem value="rgba">RGBA - rgb(255,255,255, 0.5)</MenuItem>
+          </Select>
         </div>
       </header>
     );

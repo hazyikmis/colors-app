@@ -9,8 +9,30 @@ import MenuItem from "@material-ui/core/MenuItem";
 import "./Navbar.css";
 
 export default class Navbar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { format: "hex" };
+  }
+
+  handleChange = (e) => {
+    //-->Problematic:
+    // this.setState({ format: e.target.value });
+    // this.props.handleChangeFormat(this.state.format);
+
+    //-->Works nice:
+    // this.setState({ format: e.target.value }, () => {
+    //   this.props.handleChangeFormat(this.state.format);
+    // });
+
+    //-->Works nice also:
+    this.setState({ format: e.target.value });
+    this.props.handleChangeFormat(e.target.value);
+  };
+
   render() {
+    //const { level, changeLevel, handleChangeFormat } = this.props;
     const { level, changeLevel } = this.props;
+    const { format } = this.state;
     return (
       <header className="Navbar">
         <div className="logo">
@@ -43,8 +65,9 @@ export default class Navbar extends Component {
             />
           </div>
         </div>
+        {/* <Select value={format} onChange={handleChangeFormat}> */}
         <div className="select-container">
-          <Select>
+          <Select value={format} onChange={this.handleChange}>
             <MenuItem value="hex">HEX - #ffffff</MenuItem>
             <MenuItem value="rgb">RGB - rgb(255,255,255)</MenuItem>
             <MenuItem value="rgba">RGBA - rgb(255,255,255, 0.5)</MenuItem>

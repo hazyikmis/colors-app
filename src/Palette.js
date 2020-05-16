@@ -12,11 +12,20 @@ import "./Palette.css";
 export default class Palette extends Component {
   constructor(props) {
     super(props);
-    this.state = { level: 500 };
+    this.state = { level: 500, format: "hex" };
   }
 
   changeLevel = (level) => {
     this.setState({ level });
+  };
+
+  // changeColorFormat = (e) => {
+  //   alert(e.target.value);
+  // };
+
+  changeColorFormat = (val) => {
+    //alert(val);
+    this.setState({ format: val });
   };
 
   render() {
@@ -29,10 +38,11 @@ export default class Palette extends Component {
     //(500 selected as starting point - just in the middle )
 
     //const colorBoxes = this.props.palette.colors[500].map((color) => (
-    const { level } = this.state;
+    const { level, format } = this.state;
     const { colors } = this.props.palette;
     const colorBoxes = colors[level].map((color) => (
-      <ColorBox background={color.hex} name={color.name} />
+      // <ColorBox background={color.hex} name={color.name} />
+      <ColorBox background={color[format]} name={color.name} />
     ));
     return (
       <div className="Palette">
@@ -60,7 +70,11 @@ export default class Palette extends Component {
             }}
           />
         </div> */}
-        <Navbar level={level} changeLevel={this.changeLevel} />
+        <Navbar
+          level={level}
+          changeLevel={this.changeLevel}
+          handleChangeFormat={this.changeColorFormat}
+        />
         {/* Navbar goes here */}
         <div className="Palette-colors">{colorBoxes}</div>
         {/* footer eventually */}

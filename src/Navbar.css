@@ -35,3 +35,8 @@
   text-decoration: none;
   color: black;
 }
+
+.select-container {
+  margin-left: auto; /* this aligns right */
+  margin-right: 1rem;
+}

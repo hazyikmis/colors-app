@@ -5,3 +5,16 @@
 .Palette-colors {
   height: 90%;
 }
+
+.slider {
+  width: 340px;
+  margin: 0 10px;
+  display: inline-block;
+}
+/*
+--> these are the default classes to style slider : BUT NO MORE USE
+--> now, we are sending these styling attributes as a parameter to Slider component
+.rc-slider-track
+.rc-slider-handle
+.rc-slider-rail
+*/

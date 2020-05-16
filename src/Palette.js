@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import ColorBox from "./ColorBox";
-import "./Palette.css";
+
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
+
+//for specificity reasons "Palette.css" should be at the end!
+//to overwrite some default styles decided by rc-slider/assets/index.css
+import "./Palette.css";
 
 export default class Palette extends Component {
   constructor(props) {
@@ -31,13 +35,30 @@ export default class Palette extends Component {
     ));
     return (
       <div className="Palette">
-        <Slider
-          defaultValue={level}
-          min={100}
-          max={900}
-          step={100}
-          onAfterChange={this.changeLevel}
-        />
+        <div className="slider">
+          <Slider
+            defaultValue={level}
+            min={100}
+            max={900}
+            step={100}
+            onAfterChange={this.changeLevel}
+            trackStyle={{
+              background: "transparent",
+            }}
+            railStyle={{
+              height: "8px",
+            }}
+            handleStyle={{
+              backgroundColor: "green",
+              outline: "none",
+              border: 0,
+              boxShadow: "none",
+              height: 15,
+              width: 15,
+              marginTop: -4,
+            }}
+          />
+        </div>
         {/* Navbar goes here */}
         <div className="Palette-colors">{colorBoxes}</div>
         {/* footer eventually */}

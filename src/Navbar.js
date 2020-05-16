@@ -6,15 +6,19 @@ import "rc-slider/assets/index.css";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 
+import Snackbar from "@material-ui/core/Snackbar";
+import CloseIcon from "@material-ui/icons/Close";
+import IconButton from "@material-ui/core/IconButton";
+
 import "./Navbar.css";
 
 export default class Navbar extends Component {
   constructor(props) {
     super(props);
-    this.state = { format: "hex" };
+    this.state = { format: "hex", snackOpen: false };
   }
 
-  handleChange = (e) => {
+  handleChangeSelect = (e) => {
     //-->Problematic:
     // this.setState({ format: e.target.value });
     // this.props.handleChangeFormat(this.state.format);
@@ -25,8 +29,12 @@ export default class Navbar extends Component {
     // });
 
     //-->Works nice also:
-    this.setState({ format: e.target.value });
+    this.setState({ format: e.target.value, snackOpen: true });
     this.props.handleChangeFormat(e.target.value);
+  };
+
+  closeSnackbar = () => {
+    this.setState({ snackOpen: false });
   };
 
   render() {
@@ -67,12 +75,36 @@ export default class Navbar extends Component {
         </div>
         {/* <Select value={format} onChange={handleChangeFormat}> */}
         <div className="select-container">
-          <Select value={format} onChange={this.handleChange}>
+          <Select value={format} onChange={this.handleChangeSelect}>
             <MenuItem value="hex">HEX - #ffffff</MenuItem>
             <MenuItem value="rgb">RGB - rgb(255,255,255)</MenuItem>
             <MenuItem value="rgba">RGBA - rgb(255,255,255, 0.5)</MenuItem>
           </Select>
         </div>
+        <Snackbar
+          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+          open={this.state.snackOpen}
+          autoHideDuration={3000}
+          message={
+            <span id="message-id">
+              Format changed to {format.toUpperCase()}
+            </span>
+          }
+          ContentProps={{
+            "aria-describedby": "message-id",
+          }}
+          onClose={this.closeSnackbar} //causes to close Snackbar whenever user clicks somewhere
+          action={[
+            <IconButton
+              onClick={this.closeSnackbar}
+              color="inherit"
+              key="close"
+              aria-label="close"
+            >
+              <CloseIcon />
+            </IconButton>,
+          ]}
+        />
       </header>
     );
   }

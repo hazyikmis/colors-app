@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import ColorBox from "./ColorBox";
 
-import Slider from "rc-slider";
-import "rc-slider/assets/index.css";
+// import Slider from "rc-slider";
+// import "rc-slider/assets/index.css";
+import Navbar from "./Navbar";
 
 //for specificity reasons "Palette.css" should be at the end!
 //to overwrite some default styles decided by rc-slider/assets/index.css
@@ -35,7 +36,7 @@ export default class Palette extends Component {
     ));
     return (
       <div className="Palette">
-        <div className="slider">
+        {/* <div className="slider">
           <Slider
             defaultValue={level}
             min={100}
@@ -58,7 +59,8 @@ export default class Palette extends Component {
               marginTop: -4,
             }}
           />
-        </div>
+        </div> */}
+        <Navbar level={level} changeLevel={this.changeLevel} />
         {/* Navbar goes here */}
         <div className="Palette-colors">{colorBoxes}</div>
         {/* footer eventually */}

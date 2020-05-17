@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 
 import { withStyles } from "@material-ui/core/styles";
 
@@ -36,7 +36,22 @@ const styles = {
   },
 };
 
+// we have used Link like below, but this caused to underline all text & emojis
+//so, we have used history.push, rather than Link
+/* 
+  <Link to={`/palette/${palette.id}`}>
+    <MiniPalette {...palette} />
+  </Link> 
+*/
+
 class PaletteList extends Component {
+  //goToPalette = (id) => {  //NO DIFFERENCE
+  goToPalette(id) {
+    console.log("JJI");
+    //since we have used history, "PaletteList" component should NOT be called with render in the App.js
+    //or, if we still want to use render, then "routeProps" should be sent as argument to PaletteList component
+    this.props.history.push(`palette/${id}`);
+  }
   render() {
     const { classes, palettes } = this.props;
     return (
@@ -47,7 +62,10 @@ class PaletteList extends Component {
           </nav>
           <div className={classes.palettes}>
             {palettes.map((palette) => (
-              <MiniPalette {...palette} />
+              <MiniPalette
+                {...palette}
+                handleClick={() => this.goToPalette(palette.id)}
+              />
             ))}
           </div>
         </div>

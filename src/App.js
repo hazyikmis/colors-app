@@ -25,7 +25,11 @@ class App extends Component {
         <Route
           exact
           path="/"
-          render={() => <PaletteList palettes={seedColors} />}
+          //render={() => <PaletteList palettes={seedColors} />}
+          //since, we have started to use "history.push" in the PaletteList.js we need to pass routeProps
+          render={(routeProps) => (
+            <PaletteList palettes={seedColors} {...routeProps} />
+          )}
         />
         {/*
         <Route

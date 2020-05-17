@@ -6,6 +6,8 @@ import Palette from "./Palette";
 import seedColors from "./seedColors";
 import { generatePalette } from "./colorHelpers";
 
+import PaletteList from "./PaletteList";
+
 //<Palette palette={seedColors[4]} />
 //<Palette {...seedColors[4]} />
 
@@ -17,9 +19,14 @@ class App extends Component {
 
   render() {
     //console.log(generatePalette(seedColors[4]));
+    //<Route exact path="/" render={() => <h1>Palette List</h1>} />
     return (
       <Switch>
-        <Route exact path="/" render={() => <h1>Palette List</h1>} />
+        <Route
+          exact
+          path="/"
+          render={() => <PaletteList palettes={seedColors} />}
+        />
         {/*
         <Route
           exact

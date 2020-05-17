@@ -8,7 +8,7 @@ import MiniPalette from "./MiniPalette";
 const styles = {
   root: {
     backgroundColor: "blue",
-    height: "100%",
+    height: "100vh",
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "center",
@@ -19,7 +19,7 @@ const styles = {
     alignItems: "flex-start",
     flexDirection: "column",
     flexWrap: "wrap",
-    border: "1px solid white",
+    //border: "1px solid white",
   },
   nav: {
     display: "flex",

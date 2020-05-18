@@ -17,7 +17,12 @@ export default class ColorBox extends Component {
   }
 
   render() {
-    const { name, background, /* id, paletteId,*/ moreURL } = this.props; //id is color.id
+    const {
+      name,
+      background,
+      /* id, paletteId,*/ moreURL,
+      showMoreLink,
+    } = this.props; //id is color.id
     const { copied } = this.state;
     return (
       <CopyToClipboard text={background} onCopy={this.changeCopyState}>
@@ -40,13 +45,15 @@ export default class ColorBox extends Component {
           </div>
           {/* onClick : stopPropagation used to prevent copy animation */}
           {/* /palette/:paletteId/:colorId : we need to pass through :paletteId & :colorId from Palette.js to here (ColorBox.js) */}
-          <Link
-            //to={`/palette/${paletteId}/${id}`}
-            to={moreURL}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <span className="see-more">More</span>
-          </Link>
+          {showMoreLink && (
+            <Link
+              //to={`/palette/${paletteId}/${id}`}
+              to={moreURL}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <span className="see-more">More</span>
+            </Link>
+          )}
         </div>
       </CopyToClipboard>
     );

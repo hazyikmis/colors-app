@@ -53,9 +53,19 @@ class App extends Component {
           )}
         />
         {/* <Route path="/palette/:paletteId/:colorId" render={() => <h1>single color page</h1>} /> */}
+        {/* <Route path="/palette/:paletteId/:colorId" render={() => <SingleColorPalette />} /> */}
         <Route
           path="/palette/:paletteId/:colorId"
-          render={() => <SingleColorPalette />}
+          render={(routeProps) => (
+            <SingleColorPalette
+              colorId={routeProps.match.params.colorId}
+              palette={generatePalette(
+                //this is too much data sending, no need to send all palette
+                //but somehow we will extract required data (shades for only one color) in the SingleColorPalette.js
+                this.findPalette(routeProps.match.params.paletteId)
+              )}
+            />
+          )}
         />
       </Switch>
 

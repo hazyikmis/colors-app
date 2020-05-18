@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 
 import ColorBox from "./ColorBox";
+import Navbar from "./Navbar";
+import { PaletteFooter } from "./PaletteFooter";
 
 export default class SingleColorPalette extends Component {
   constructor(props) {
@@ -11,6 +13,7 @@ export default class SingleColorPalette extends Component {
     //since shades never changes, we do not need to store them in state!!!
     this._shades = this.gatherShades(this.props.palette, this.props.colorId);
     //console.log(this._shades);
+    this.state = { format: "hex" };
   }
 
   gatherShades(palette, colorToFilterBy) {
@@ -33,20 +36,33 @@ export default class SingleColorPalette extends Component {
     //we do not need the first shade named "colorX 50", we need van 100 tot 900
   }
 
+  changeColorFormat = (val) => {
+    //alert(val);
+    this.setState({ format: val });
+  };
+
   render() {
+    const { format } = this.state;
+    const { paletteName, emoji } = this.props.palette;
     //shade is actually means color
     const colorBoxes = this._shades.map((shade) => (
       <ColorBox
         key={shade.id}
         name={shade.name}
-        background={shade.hex}
+        //background={shade.hex}
+        background={shade[format]}
         showMoreLink={false}
       />
     ));
     return (
       <div className="Palette">
-        <h1>Single Color Palette</h1>
+        <Navbar
+          handleChangeFormat={this.changeColorFormat}
+          isSingleColorPalette={true}
+        />
+        {/* <h1>Single Color Palette</h1> */}
         <div className="Palette-colors">{colorBoxes}</div>
+        <PaletteFooter paletteName={paletteName} emoji={emoji} />
       </div>
     );
   }

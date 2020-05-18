@@ -8,6 +8,7 @@ import Navbar from "./Navbar";
 //for specificity reasons "Palette.css" should be at the end!
 //to overwrite some default styles decided by rc-slider/assets/index.css
 import "./Palette.css";
+import { PaletteFooter } from "./PaletteFooter";
 
 export default class Palette extends Component {
   constructor(props) {
@@ -82,14 +83,16 @@ export default class Palette extends Component {
           level={level}
           changeLevel={this.changeLevel}
           handleChangeFormat={this.changeColorFormat}
+          isSingleColorPalette={false}
         />
         {/* Navbar goes here */}
         <div className="Palette-colors">{colorBoxes}</div>
         {/* footer eventually */}
-        <footer className="Palette-footer">
+        {/* <footer className="Palette-footer">
           {paletteName}
           <span className="emoji">{emoji}</span>
-        </footer>
+        </footer> */}
+        <PaletteFooter paletteName={paletteName} emoji={emoji} />
       </div>
     );
   }

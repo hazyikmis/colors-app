@@ -40,40 +40,42 @@ export default class Navbar extends Component {
 
   render() {
     //const { level, changeLevel, handleChangeFormat } = this.props;
-    const { level, changeLevel } = this.props;
+    const { level, changeLevel, isSingleColorPalette } = this.props;
     const { format } = this.state;
     return (
       <header className="Navbar">
         <div className="logo">
           <Link to="/">react color picker</Link>
         </div>
-        <div className="slider-container">
-          <span>Level: {level}</span>
-          <div className="slider">
-            <Slider
-              defaultValue={level}
-              min={100}
-              max={900}
-              step={100}
-              onAfterChange={changeLevel}
-              trackStyle={{
-                background: "transparent",
-              }}
-              railStyle={{
-                height: "8px",
-              }}
-              handleStyle={{
-                backgroundColor: "green",
-                outline: "none",
-                border: 0,
-                boxShadow: "none",
-                height: 15,
-                width: 15,
-                marginTop: -4,
-              }}
-            />
+        {!isSingleColorPalette && (
+          <div className="slider-container">
+            <span>Level: {level}</span>
+            <div className="slider">
+              <Slider
+                defaultValue={level}
+                min={100}
+                max={900}
+                step={100}
+                onAfterChange={changeLevel}
+                trackStyle={{
+                  background: "transparent",
+                }}
+                railStyle={{
+                  height: "8px",
+                }}
+                handleStyle={{
+                  backgroundColor: "green",
+                  outline: "none",
+                  border: 0,
+                  boxShadow: "none",
+                  height: 15,
+                  width: 15,
+                  marginTop: -4,
+                }}
+              />
+            </div>
           </div>
-        </div>
+        )}
         {/* <Select value={format} onChange={handleChangeFormat}> */}
         <div className="select-container">
           <Select value={format} onChange={this.handleChangeSelect}>

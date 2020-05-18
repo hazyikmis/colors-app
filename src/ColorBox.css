@@ -8,7 +8,17 @@
   margin-bottom: -4px; /* this is required after styling ".see-more" */
 }
 
-.copy-button {
+/* if ColorBox is inside a SingleColorPalette then behave differently! */
+.SingleColorPalette .ColorBox {
+  height: 50%;
+}
+
+.ColorBox.go-back {
+  background-color: black;
+}
+
+.copy-button,
+.back-button {
   width: 100px;
   height: 30px;
   position: absolute;
@@ -25,6 +35,11 @@
   color: white;
   text-transform: uppercase;
   border: none;
+  text-decoration: none;
+  /* opacity: 0;  */
+  /* Copy button completely hidden */
+}
+.copy-button {
   opacity: 0; /* Copy button completely hidden */
 }
 

@@ -39,7 +39,7 @@ class App extends Component {
         />
         */}
         {/* we need to take this "id", retrieve palette data from seedColors and generate palette and finally call Palette component  */}
-        {/* IMNPORTANT!!!: Below you can see the very clever way of using "routeProps", instantly accessing "id" in the route and using it when calling a method */}
+        {/* IMPORTANT!!!: Below you can see the very clever way of using "routeProps", instantly accessing "id" in the route and using it when calling a method */}
         <Route
           exact
           path="/palette/:id"
@@ -50,6 +50,10 @@ class App extends Component {
               )}
             />
           )}
+        />
+        <Route
+          path="/palette/:paletteId/:colorId"
+          render={() => <h1>single color page</h1>}
         />
       </Switch>
 

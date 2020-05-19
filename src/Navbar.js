@@ -11,9 +11,47 @@ import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
 
-import "./Navbar.css";
+//import "./Navbar.css";
 
-export default class Navbar extends Component {
+import { withStyles } from "@material-ui/core/styles";
+
+import styles from "./styles/NavbarStyles";
+
+/*
+const styles = {
+  slider: {
+    width: "340px",
+    margin: "0 10px",
+    display: "inline-block",
+  },
+  Navbar: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    height: "6vh",
+  },
+  logo: {
+    marginRight: "15px",
+    padding: "0 13px",
+    fontSize: "22px",
+    backgroundColor: "#eceff1",
+    fontFamily: "Roboto",
+    height: "100%",
+    display: "flex",
+    alignItems: "center",
+    "& a": {
+      textDecoration: "none",
+      color: "black",
+    },
+  },
+  selectContainer: {
+    marginLeft: "auto" /* this aligns right //,
+    marginRight: "1rem",
+  },
+};
+*/
+
+class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = { format: "hex", snackOpen: false };
@@ -40,17 +78,17 @@ export default class Navbar extends Component {
 
   render() {
     //const { level, changeLevel, handleChangeFormat } = this.props;
-    const { level, changeLevel, isSingleColorPalette } = this.props;
+    const { level, changeLevel, isSingleColorPalette, classes } = this.props;
     const { format } = this.state;
     return (
-      <header className="Navbar">
-        <div className="logo">
+      <header className={classes.Navbar}>
+        <div className={classes.logo}>
           <Link to="/">react color picker</Link>
         </div>
         {!isSingleColorPalette && (
-          <div className="slider-container">
+          <div>
             <span>Level: {level}</span>
-            <div className="slider">
+            <div className={classes.slider}>
               <Slider
                 defaultValue={level}
                 min={100}
@@ -77,7 +115,8 @@ export default class Navbar extends Component {
           </div>
         )}
         {/* <Select value={format} onChange={handleChangeFormat}> */}
-        <div className="select-container">
+        {/* <div className="select-container"> */}
+        <div className={classes.selectContainer}>
           <Select value={format} onChange={this.handleChangeSelect}>
             <MenuItem value="hex">HEX - #ffffff</MenuItem>
             <MenuItem value="rgb">RGB - rgb(255,255,255)</MenuItem>
@@ -112,3 +151,5 @@ export default class Navbar extends Component {
     );
   }
 }
+
+export default withStyles(styles)(Navbar);

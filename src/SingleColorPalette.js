@@ -52,7 +52,8 @@ export default class SingleColorPalette extends Component {
         name={shade.name}
         //background={shade.hex}
         background={shade[format]}
-        showMoreLink={false}
+        //showMoreLink={false}
+        showFullPalette={false}
       />
     ));
     return (

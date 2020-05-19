@@ -68,6 +68,18 @@
   font-size: 12px;
 }
 
+.light-text {
+  color: white;
+}
+
+/* this .dark-test class alone overwritten by .ColorBox class */
+/* so, we need to be more specific */
+/* .dark-text { */
+.ColorBox .dark-text {
+  /* color: black; */
+  color: rgba(0, 0, 0, 0.5); /* better than black*/
+}
+
 .see-more {
   background: rgba(255, 255, 255, 0.3);
   position: absolute;

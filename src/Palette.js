@@ -7,10 +7,36 @@ import Navbar from "./Navbar";
 
 //for specificity reasons "Palette.css" should be at the end!
 //to overwrite some default styles decided by rc-slider/assets/index.css
-import "./Palette.css";
 import { PaletteFooter } from "./PaletteFooter";
+import { withStyles } from "@material-ui/core/styles";
+import "./Palette.css";
 
-export default class Palette extends Component {
+const styles = {
+  Palette: {
+    height: "98vh",
+    width: "99vw",
+    maxWidth: "100%",
+    display: "flex",
+    flexDirection: "column",
+  },
+  PaletteColors: {
+    height: "90%",
+  },
+  PaletteFooter: {
+    backgroundColor: "white",
+    height: "5vh",
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    fontWeight: "bold",
+  },
+  emoji: {
+    fontSize: "1.5rem",
+    margin: "0 1rem",
+  },
+};
+
+class Palette extends Component {
   constructor(props) {
     super(props);
     this.state = { level: 500, format: "hex" };
@@ -40,6 +66,7 @@ export default class Palette extends Component {
 
     //const colorBoxes = this.props.palette.colors[500].map((color) => (
     const { level, format } = this.state;
+    const { classes } = this.props;
     const { colors, paletteName, emoji, id } = this.props.palette;
     const colorBoxes = colors[level].map((color) => (
       // <ColorBox background={color.hex} name={color.name} />
@@ -55,7 +82,7 @@ export default class Palette extends Component {
       />
     ));
     return (
-      <div className="Palette">
+      <div className={classes.Palette}>
         {/* <div className="slider">
           <Slider
             defaultValue={level}
@@ -87,7 +114,7 @@ export default class Palette extends Component {
           isSingleColorPalette={false}
         />
         {/* Navbar goes here */}
-        <div className="Palette-colors">{colorBoxes}</div>
+        <div className={classes.PaletteColors}>{colorBoxes}</div>
         {/* footer eventually */}
         {/* <footer className="Palette-footer">
           {paletteName}
@@ -98,3 +125,5 @@ export default class Palette extends Component {
     );
   }
 }
+
+export default withStyles(styles)(Palette);

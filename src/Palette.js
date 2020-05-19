@@ -7,10 +7,17 @@ import Navbar from "./Navbar";
 
 //for specificity reasons "Palette.css" should be at the end!
 //to overwrite some default styles decided by rc-slider/assets/index.css
-import { PaletteFooter } from "./PaletteFooter";
-import { withStyles } from "@material-ui/core/styles";
-import "./Palette.css";
+//import { PaletteFooter } from "./PaletteFooter";
+import PaletteFooter from "./PaletteFooter";
 
+import { withStyles } from "@material-ui/core/styles";
+//import "./Palette.css";
+
+import styles from "./styles/PaletteStyles";
+
+//The styles below moved to a separate file src/PaletteStyles.js AND imported here as "styles"
+//the 2 class below already exist in the PaletteStyles - shared with SingleColorPalette
+/*
 const styles = {
   Palette: {
     height: "98vh",
@@ -22,19 +29,8 @@ const styles = {
   PaletteColors: {
     height: "90%",
   },
-  PaletteFooter: {
-    backgroundColor: "white",
-    height: "5vh",
-    display: "flex",
-    justifyContent: "flex-end",
-    alignItems: "center",
-    fontWeight: "bold",
-  },
-  emoji: {
-    fontSize: "1.5rem",
-    margin: "0 1rem",
-  },
 };
+*/
 
 class Palette extends Component {
   constructor(props) {

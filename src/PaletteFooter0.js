@@ -4,10 +4,6 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 
-import styles from "./styles/PaletteFooterStyles";
-
-//The styles below moved to a separate file src/PaletteFooterStyles.js AND imported here as "styles"
-/*
 const styles = {
   PaletteFooter: {
     backgroundColor: "white",
@@ -22,7 +18,6 @@ const styles = {
     margin: "0 1rem",
   },
 };
-*/
 
 //export const PaletteFooter = (props) => {
 const PaletteFooter = (props) => {

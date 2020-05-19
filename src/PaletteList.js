@@ -5,6 +5,10 @@ import { withStyles } from "@material-ui/core/styles";
 
 import MiniPalette from "./MiniPalette";
 
+import styles from "./styles/PaletteListStyles";
+
+//The styles below moved to a separate file src/PaletteListStyles.js AND imported here as "styles"
+/*
 const styles = {
   root: {
     backgroundColor: "blue",
@@ -35,6 +39,7 @@ const styles = {
     gridGap: "5%",
   },
 };
+*/
 
 // we have used Link like below, but this caused to underline all text & emojis
 //so, we have used history.push, rather than Link

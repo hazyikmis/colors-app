@@ -146,6 +146,22 @@ class NewPaletteForm extends Component {
     this.setState({ newName: evt.target.value });
   };
 
+  //this method below might be named as "handleSubmit"
+  savePalette = () => {
+    //App.js is the place where keeping the track of all palettes
+    //savePalette send as a prop from App to this component
+    const newName = "New Test Palette";
+    const newPalette = {
+      paletteName: newName,
+      id: newName.toLowerCase().replace(/ /g, "-"),
+      colors: this.state.colors,
+    };
+    this.props.savePalette(newPalette);
+    this.props.history.push("/");
+    //we noticed that this component do not has access to history,
+    //so, we have changed the Route calling, added routeProps
+  };
+
   render() {
     //const classes = useStyles();
     //const theme = useTheme();
@@ -159,6 +175,7 @@ class NewPaletteForm extends Component {
           className={clsx(classes.appBar, {
             [classes.appBarShift]: open,
           })}
+          color="default"
         >
           <Toolbar>
             <IconButton
@@ -173,6 +190,13 @@ class NewPaletteForm extends Component {
             <Typography variant="h6" noWrap>
               Persistent drawer
             </Typography>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={this.savePalette}
+            >
+              Save Palette
+            </Button>
           </Toolbar>
         </AppBar>
         <Drawer

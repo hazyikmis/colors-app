@@ -14,18 +14,14 @@ import NewPaletteForm from "./NewPaletteForm";
 //<Palette {...seedColors[4]} />
 
 class App extends Component {
-  state = { palettes: seedColors };
-
-  findPalette = (id) => {
+  findPalette(id) {
     //seedColors is an array of "palette"s
-    //return seedColors.find((palette) => palette.id === id);
-    return this.state.palettes.find((palette) => palette.id === id);
-  };
+    return seedColors.find((palette) => palette.id === id);
+  }
 
-  savePalette = (newPalette) => {
-    //console.log(newPalette);
-    this.setState({ palettes: [...this.state.palettes, newPalette] });
-  };
+  savePalette(newPalette) {
+    console.log(newPalette);
+  }
 
   render() {
     //console.log(generatePalette(seedColors[4]));
@@ -46,8 +42,7 @@ class App extends Component {
           //render={() => <PaletteList palettes={seedColors} />}
           //since, we have started to use "history.push" in the PaletteList.js we need to pass routeProps
           render={(routeProps) => (
-            //<PaletteList palettes={seedColors} {...routeProps} />
-            <PaletteList palettes={this.state.palettes} {...routeProps} />
+            <PaletteList palettes={seedColors} {...routeProps} />
           )}
         />
         {/*

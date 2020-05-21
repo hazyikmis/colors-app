@@ -37,7 +37,11 @@ class App extends Component {
           path="/palette/new"
           //render={() => <NewPaletteForm savePalette={this.savePalette} />}
           render={(routeProps) => (
-            <NewPaletteForm savePalette={this.savePalette} {...routeProps} />
+            <NewPaletteForm
+              savePalette={this.savePalette}
+              palettes={this.state.palettes} //this whole list required for validating new palette name, checking if the new name exists
+              {...routeProps}
+            />
           )}
         />
         <Route

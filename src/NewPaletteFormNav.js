@@ -16,6 +16,40 @@ import Button from "@material-ui/core/Button";
 
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
+import { withStyles } from "@material-ui/core/styles";
+
+const drawerWidth = 400;
+
+const styles = (theme) => ({
+  root: {
+    display: "flex",
+  },
+  appBar: {
+    transition: theme.transitions.create(["margin", "width"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    flexDirection: "row",
+    justifyContent: "space-between",
+    height: "64px",
+  },
+  appBarShift: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+    transition: theme.transitions.create(["margin", "width"], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  hide: {
+    display: "none",
+  },
+  navBtns: {},
+});
+
 class NewPaletteFormNav extends Component {
   state = {
     newPaletteName: "",
@@ -38,7 +72,7 @@ class NewPaletteFormNav extends Component {
     const { classes, open, handleSave, handleDrawerOpen } = this.props;
     const { newPaletteName } = this.state;
     return (
-      <div>
+      <div className={classes.root}>
         <CssBaseline />
         <AppBar
           position="fixed"
@@ -58,8 +92,10 @@ class NewPaletteFormNav extends Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap>
-              Persistent drawer
+              Create New Palette
             </Typography>
+          </Toolbar>
+          <div className={classes.navBtns}>
             <ValidatorForm onSubmit={() => handleSave(newPaletteName)}>
               <TextValidator
                 label="Palette Name"
@@ -80,17 +116,18 @@ class NewPaletteFormNav extends Component {
               >
                 Save Palette
               </Button>
-              <Link to="/">
-                <Button variant="contained" color="secondary">
-                  Go Back
-                </Button>
-              </Link>
             </ValidatorForm>
-          </Toolbar>
+            <Link to="/">
+              <Button variant="contained" color="secondary">
+                Go Back
+              </Button>
+            </Link>
+          </div>
         </AppBar>
       </div>
     );
   }
 }
 
-export default NewPaletteFormNav;
+//export default NewPaletteFormNav;
+export default withStyles(styles, { withTheme: true })(NewPaletteFormNav);

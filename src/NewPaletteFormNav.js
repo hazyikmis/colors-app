@@ -85,8 +85,13 @@ class NewPaletteFormNav extends Component {
 
   state = { formDialogShowing: false };
 
-  handleClickOpen = () => {
+  //handleClickOpen = () => {
+  showForm = () => {
     this.setState({ formDialogShowing: true });
+  };
+
+  hideForm = () => {
+    this.setState({ formDialogShowing: false });
   };
 
   render() {
@@ -161,7 +166,8 @@ class NewPaletteFormNav extends Component {
             <Button
               variant="contained"
               color="primary"
-              onClick={this.handleClickOpen}
+              //onClick={this.handleClickOpen}
+              onClick={this.showForm}
               className={classes.button}
             >
               Save
@@ -175,6 +181,7 @@ class NewPaletteFormNav extends Component {
             handleSavePalette={handleSave}
             //newPaletteName={newPaletteName}
             palettes={palettes}
+            hideForm={this.hideForm}
           />
         )}
       </div>

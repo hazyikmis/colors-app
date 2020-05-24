@@ -12,6 +12,9 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
+import { Picker } from "emoji-mart";
+import "emoji-mart/css/emoji-mart.css";
+
 export default class PaletteMetaForm extends Component {
   state = { open: true, newPaletteName: "" };
 
@@ -28,9 +31,9 @@ export default class PaletteMetaForm extends Component {
   //   this.setState({ open: true });
   // };
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+  // handleClose = () => {
+  //   this.setState({ open: false });
+  // };
 
   handleChange = (evt) => {
     //this.setState({ newPaletteName: evt.target.value });
@@ -40,13 +43,15 @@ export default class PaletteMetaForm extends Component {
   render() {
     const {
       /*handleChange,*/ handleSavePalette /*, newPaletteName */,
+      hideForm,
     } = this.props;
     //initially newPaletteName & handleChange comes from NewPaletteFormNav as props, but now newPaletteName is controlled as state in here
     const { newPaletteName } = this.state;
     return (
       <Dialog
         open={this.state.open}
-        onClose={this.handleClose}
+        //onClose={this.handleClose}
+        onClose={hideForm}
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">Choose a palette name</DialogTitle>
@@ -57,6 +62,9 @@ export default class PaletteMetaForm extends Component {
               Please enter a name for your new beautiful palette. Make sure it
               is unique.
             </DialogContentText>
+
+            <Picker />
+
             <TextValidator
               label="Palette Name"
               name="newPaletteName" //required for single "handleChange" event for all
@@ -72,7 +80,8 @@ export default class PaletteMetaForm extends Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            {/* </DialogActions><Button onClick={this.handleClose} color="primary"> */}
+            <Button onClick={hideForm} color="primary">
               Cancel
             </Button>
             <Button

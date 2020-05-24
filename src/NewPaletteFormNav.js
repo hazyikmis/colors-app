@@ -18,6 +18,8 @@ import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 import { withStyles } from "@material-ui/core/styles";
 
+import PaletteMetaForm from "./PaletteMetaForm";
+
 const drawerWidth = 400;
 
 const styles = (theme) => ({
@@ -51,26 +53,35 @@ const styles = (theme) => ({
 });
 
 class NewPaletteFormNav extends Component {
-  state = {
-    newPaletteName: "",
-  };
+  //its better approach to move state.newPaletteName to PaletteMetaForm dialog, because there is no other use here
+  // state = {
+  //   newPaletteName: "",
+  // };
 
-  componentDidMount() {
-    ValidatorForm.addValidationRule("isPaletteNameUnique", (value) =>
-      this.props.palettes.every(
-        ({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase()
-      )
-    );
-  }
+  //moved to the PaletteMetaForm.js
+  // componentDidMount() {
+  //   ValidatorForm.addValidationRule("isPaletteNameUnique", (value) =>
+  //     this.props.palettes.every(
+  //       ({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase()
+  //     )
+  //   );
+  // }
 
-  handleChange = (evt) => {
-    //this.setState({ newPaletteName: evt.target.value });
-    this.setState({ [evt.target.name]: evt.target.value });
-  };
+  //since we have moved the state.newPaletteName to PaletteMetaForm, then there is no use here
+  // handleChange = (evt) => {
+  //   //this.setState({ newPaletteName: evt.target.value });
+  //   this.setState({ [evt.target.name]: evt.target.value });
+  // };
 
   render() {
-    const { classes, open, handleSave, handleDrawerOpen } = this.props;
-    const { newPaletteName } = this.state;
+    const {
+      classes,
+      open,
+      handleSave,
+      handleDrawerOpen,
+      palettes,
+    } = this.props;
+    //const { newPaletteName } = this.state;
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -96,6 +107,8 @@ class NewPaletteFormNav extends Component {
             </Typography>
           </Toolbar>
           <div className={classes.navBtns}>
+            {/* 
+            //all this code moved to the PaletteMetaForm.js
             <ValidatorForm onSubmit={() => handleSave(newPaletteName)}>
               <TextValidator
                 label="Palette Name"
@@ -117,6 +130,13 @@ class NewPaletteFormNav extends Component {
                 Save Palette
               </Button>
             </ValidatorForm>
+ */}
+            <PaletteMetaForm
+              //handleChange={this.handleChange}
+              handleSavePalette={handleSave}
+              //newPaletteName={newPaletteName}
+              palettes={palettes}
+            />
             <Link to="/">
               <Button variant="contained" color="secondary">
                 Go Back

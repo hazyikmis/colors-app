@@ -14,7 +14,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Button from "@material-ui/core/Button";
 //import DraggableColorBox from "./DraggableColorBox"; //moved to inside DraggableColorList.js
 
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+//moved to PaletteMetaForm.js
+//import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 import { withStyles } from "@material-ui/core/styles";
 
@@ -33,6 +34,7 @@ const styles = (theme) => ({
     }),
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
     height: "64px",
   },
   appBarShift: {
@@ -49,7 +51,15 @@ const styles = (theme) => ({
   hide: {
     display: "none",
   },
-  navBtns: {},
+  navBtns: {
+    marginRight: "1rem",
+  },
+  button: {
+    margin: "0 0.5rem",
+  },
+  link: {
+    textDecoration: "none",
+  },
 });
 
 class NewPaletteFormNav extends Component {
@@ -72,6 +82,12 @@ class NewPaletteFormNav extends Component {
   //   //this.setState({ newPaletteName: evt.target.value });
   //   this.setState({ [evt.target.name]: evt.target.value });
   // };
+
+  state = { formDialogShowing: false };
+
+  handleClickOpen = () => {
+    this.setState({ formDialogShowing: true });
+  };
 
   render() {
     const {
@@ -131,19 +147,36 @@ class NewPaletteFormNav extends Component {
               </Button>
             </ValidatorForm>
  */}
-            <PaletteMetaForm
-              //handleChange={this.handleChange}
-              handleSavePalette={handleSave}
-              //newPaletteName={newPaletteName}
-              palettes={palettes}
-            />
-            <Link to="/">
-              <Button variant="contained" color="secondary">
+            <Link to="/" className={classes.link}>
+              <Button
+                variant="contained"
+                color="secondary"
+                className={classes.button}
+              >
                 Go Back
               </Button>
             </Link>
+
+            {/* Open form dialog */}
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={this.handleClickOpen}
+              className={classes.button}
+            >
+              Save
+            </Button>
           </div>
         </AppBar>
+
+        {this.state.formDialogShowing && (
+          <PaletteMetaForm
+            //handleChange={this.handleChange}
+            handleSavePalette={handleSave}
+            //newPaletteName={newPaletteName}
+            palettes={palettes}
+          />
+        )}
       </div>
     );
   }

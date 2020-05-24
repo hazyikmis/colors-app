@@ -168,24 +168,39 @@ class NewPaletteForm extends Component {
   };
   */
 
+  /*
   //this method below might be named as "handleSubmit"
   //savePalette = () => {
-  savePalette = (newPaletteName) => {
+  //savePalette = (newPaletteName) => {
+  savePalette = (newPaletteNameAndEmoji) => {
     //App.js is the place where keeping the track of all palettes
     //savePalette send as a prop from App to this component
     //const newName = "New Test Palette";
     //const newName = this.state.newPaletteName; //not possible anymore
     const newPalette = {
       //paletteName: newName,
-      paletteName: newPaletteName,
+      //paletteName: newPaletteName,
+      paletteName: newPaletteNameAndEmoji.paletteName,
+      emoji: newPaletteNameAndEmoji.emoji,
       //id: newName.toLowerCase().replace(/ /g, "-"),
-      id: newPaletteName.toLowerCase().replace(/ /g, "-"),
+      //id: newPaletteName.toLowerCase().replace(/ /g, "-"),
+      id: newPaletteNameAndEmoji.paletteName.toLowerCase().replace(/ /g, "-"),
       colors: this.state.colors,
     };
     this.props.savePalette(newPalette);
     this.props.history.push("/");
     //we noticed that this component do not has access to history,
     //so, we have changed the Route calling, added routeProps
+  };
+*/
+
+  savePalette = (newPalette) => {
+    //be careful: newPalette object only contains name & emoji
+    //we are adding other info below
+    newPalette.id = newPalette.paletteName.toLowerCase().replace(/ /g, "-");
+    newPalette.colors = this.state.colors;
+    this.props.savePalette(newPalette);
+    this.props.history.push("/");
   };
 
   removeColor = (colorName) => {

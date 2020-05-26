@@ -14,7 +14,16 @@ import NewPaletteForm from "./NewPaletteForm";
 //<Palette {...seedColors[4]} />
 
 class App extends Component {
-  state = { palettes: seedColors };
+  //normally, there was no constructor defined in this class
+  //until savedPalette & usage of local storage
+  //this constructor used only for this purpose, state definition need not to move inside
+  constructor(props) {
+    super(props);
+    const savedPalettes = JSON.parse(window.localStorage.getItem("palettes"));
+    this.state = { palettes: savedPalettes || seedColors };
+  }
+
+  //state = { palettes: seedColors };
 
   findPalette = (id) => {
     //seedColors is an array of "palette"s
@@ -24,7 +33,26 @@ class App extends Component {
 
   savePalette = (newPalette) => {
     //console.log(newPalette);
-    this.setState({ palettes: [...this.state.palettes, newPalette] });
+    //this.setState({ palettes: [...this.state.palettes, newPalette] });
+    /*
+    this.setState({ palettes: [...this.state.palettes, newPalette] }, () => {
+      this.syncLocalStorage();
+    });
+    */
+    //here below is the simplified version
+    this.setState(
+      { palettes: [...this.state.palettes, newPalette] },
+      this.syncLocalStorage
+    );
+  };
+
+  syncLocalStorage = () => {
+    //save palettes to local storage
+    //since localStorage only accepts strings...
+    window.localStorage.setItem(
+      "palettes",
+      JSON.stringify(this.state.palettes)
+    );
   };
 
   render() {

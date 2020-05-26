@@ -9,23 +9,15 @@ import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 import { withStyles } from "@material-ui/core/styles";
 
+import styles from "./styles/NewPaletteFormColorPickerStyles";
+
+/*
+//moved to styles/NewPaletteFormNavStyles.js
+
 const styles = {
-  picker: {
-    width: "100% !important",
-    marginTop: "2rem",
-  },
-  addColor: {
-    width: "100%",
-    padding: "1rem",
-    marginTop: "1rem",
-    fontSize: "1rem",
-  },
-  colorNameInput: {
-    width: "100%",
-    height: "70px",
-    //margin //defined on the component itself
-  },
+//...
 };
+*/
 
 class NewPaletteFormColorPicker extends Component {
   state = {

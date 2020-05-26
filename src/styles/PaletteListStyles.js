@@ -1,12 +1,25 @@
 import sizes from "./sizes";
 
+//import bg1 from "./bg1.svg";
+import bg2 from "./bg2.svg";
+
 export default {
   root: {
-    backgroundColor: "blue",
+    //backgroundColor: "blue",
     height: "100vh",
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "center",
+    /* background by SVGBackgrounds.com */
+    /*
+    backgroundColor: "#ee3221",
+    backgroundImage: `url(${bg1})`,
+    backgroundSize: "cover",
+    */
+    backgroundColor: "#1215b3",
+    backgroundImage: `url(${bg2})`,
+    backgroundAttachment: "fixed",
+    overflow: "scroll",
   },
   container: {
     width: "50%",
@@ -47,5 +60,8 @@ export default {
       gridTemplateColumns: "repeat(1, 100%)",
       gridGap: "1rem",
     },
+  },
+  heading: {
+    fontSize: "2rem",
   },
 };

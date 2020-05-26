@@ -46,6 +46,15 @@ class App extends Component {
     );
   };
 
+  removePalette = (id) => {
+    this.setState(
+      (st) => ({
+        palettes: st.palettes.filter((palette) => palette.id !== id),
+      }),
+      this.syncLocalStorage
+    );
+  };
+
   syncLocalStorage = () => {
     //save palettes to local storage
     //since localStorage only accepts strings...
@@ -79,7 +88,11 @@ class App extends Component {
           //since, we have started to use "history.push" in the PaletteList.js we need to pass routeProps
           render={(routeProps) => (
             //<PaletteList palettes={seedColors} {...routeProps} />
-            <PaletteList palettes={this.state.palettes} {...routeProps} />
+            <PaletteList
+              palettes={this.state.palettes}
+              removePalette={this.removePalette}
+              {...routeProps}
+            />
           )}
         />
         {/*

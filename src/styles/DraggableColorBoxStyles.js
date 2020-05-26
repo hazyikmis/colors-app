@@ -7,7 +7,7 @@ export default {
     display: "inline-block",
     position: "relative",
     cursor: "pointer",
-    marginBottom: "-4px", //this is required after styling ".see-more",
+    marginBottom: "-6px", //this is required after styling ".see-more",
     "&:hover svg": {
       //this styles applied only to the root(DraggableColorBox), when hovered the DraggableColorBox
       //but we want that these styles should be applied to the deleteIcon - but deleteIcon is a dynamic class name like deleteIcon-2939-232

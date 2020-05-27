@@ -12,7 +12,9 @@ import NewPaletteForm from "./NewPaletteForm";
 
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
-import "./App.css";
+//import "./App.css"; //removed, because all styling about "Page" moved to the Page.css
+
+import { Page } from "./Page";
 
 //<Palette palette={seedColors[4]} />
 //<Palette {...seedColors[4]} />
@@ -76,25 +78,29 @@ class App extends Component {
     //And wrapped everything (Switch) inside these two components, we have also used "location" routeProps
     //Additionally, for smooth fade effect, we have wrapped each rendered component with a div with className="page"
     //we have added this class into the App.css
-
+    //Then we have refactored that, rather than using a wrapper div we have decided to use another component (Page) to wrap other components
+    //For CSSTransition, if we have used "fade" as classNames, this means that this transition also use the classes defined globally in PaletteListStyles.js
+    //...and these fading classes are used for fading away a MiniPalette from the PaletteList when deleted
+    //So, we need other fading classes, and named them "page", defined in Page.css
     return (
       <Route
         render={({ location }) => (
           <TransitionGroup>
-            <CSSTransition key={location.key} classNames="fade" timeout={500}>
+            <CSSTransition key={location.key} classNames="page" timeout={500}>
               <Switch location={location}>
                 <Route
                   exact
                   path="/palette/new"
                   //render={() => <NewPaletteForm savePalette={this.savePalette} />}
                   render={(routeProps) => (
-                    <div className="page">
+                    // <div className="page">
+                    <Page>
                       <NewPaletteForm
                         savePalette={this.savePalette}
                         palettes={this.state.palettes} //this whole list required for validating new palette name, checking if the new name exists
                         {...routeProps}
                       />
-                    </div>
+                    </Page>
                   )}
                 />
                 <Route
@@ -104,13 +110,14 @@ class App extends Component {
                   //since, we have started to use "history.push" in the PaletteList.js we need to pass routeProps
                   render={(routeProps) => (
                     //<PaletteList palettes={seedColors} {...routeProps} />
-                    <div className="page">
+                    //<div className="page"><PaletteList....../></div>
+                    <Page>
                       <PaletteList
                         palettes={this.state.palettes}
                         removePalette={this.removePalette}
                         {...routeProps}
                       />
-                    </div>
+                    </Page>
                   )}
                 />
                 {/*
@@ -126,13 +133,14 @@ class App extends Component {
                   exact
                   path="/palette/:id"
                   render={(routeProps) => (
-                    <div className="page">
+                    //<div className="page"><Palette....../></div>
+                    <Page>
                       <Palette
                         palette={generatePalette(
                           this.findPalette(routeProps.match.params.id)
                         )}
                       />
-                    </div>
+                    </Page>
                   )}
                 />
                 {/* <Route path="/palette/:paletteId/:colorId" render={() => <h1>single color page</h1>} /> */}
@@ -140,7 +148,8 @@ class App extends Component {
                 <Route
                   path="/palette/:paletteId/:colorId"
                   render={(routeProps) => (
-                    <div className="page">
+                    //<div className="page"><SingleColorPalette....../></div>
+                    <Page>
                       <SingleColorPalette
                         colorId={routeProps.match.params.colorId}
                         palette={generatePalette(
@@ -149,7 +158,7 @@ class App extends Component {
                           this.findPalette(routeProps.match.params.paletteId)
                         )}
                       />
-                    </div>
+                    </Page>
                   )}
                 />
               </Switch>

@@ -55,6 +55,7 @@ export default class PaletteMetaForm extends Component {
     };
     this.props.handleSavePalette(newPaletteMetaInfo);
     //newPaletteMetaInfo --> NewPaletteForm.savePalette(newPaletteNameAndEmoji)
+    this.setState({ stage: "" });
   };
 
   render() {

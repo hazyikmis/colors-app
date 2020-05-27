@@ -14,7 +14,7 @@ import DraggableColorList from "./DraggableColorList";
 import { arrayMove } from "react-sortable-hoc";
 import NewPaletteFormNav from "./NewPaletteFormNav";
 import NewPaletteFormColorPicker from "./NewPaletteFormColorPicker";
-
+import seedColors from "./seedColors";
 import styles from "./styles/NewPaletteFormStyles";
 
 /*
@@ -38,7 +38,10 @@ class NewPaletteForm extends Component {
       //currentColor: "teal",  //moved to NewPaletteFormColorPicker.js
       //colors: [{ color: "blue", name: "blue" }],
       //colors: props.palettes[0].colors, //this.props. also works //loading initial palette as using index 0 palette as a template
-      colors: props.palettes[0] ? props.palettes[0].colors : [],
+      //colors: props.palettes[0] ? props.palettes[0].colors : [],
+      colors: props.palettes[0]
+        ? props.palettes[0].colors
+        : seedColors[0].colors,
       //newColorName: "", //moved to NewPaletteFormColorPicker.js
       newPaletteName: "",
     };
@@ -172,12 +175,54 @@ class NewPaletteForm extends Component {
     this.setState({ colors: [] });
   };
 
+  /*
   addRandomColor = () => {
     //pick random color from existing Palettes
     //flat joins array of arrays into one single array
     const allColors = this.props.palettes.map((p) => p.colors).flat();
+    //console.log(allColors); //PROBLEM: If there is no saved palette then this allColors is []
     const rand = Math.floor(Math.random() * allColors.length);
     const randomColor = allColors[rand];
+    this.setState({ colors: [...this.state.colors, randomColor] });
+  };
+  */
+
+  /* 
+  //  THIS IS MY SOLUTION TO PREVENT ADDING SAME COLORS RANDOMLY
+    addRandomColor = () => {
+    //pick random color from existing Palettes
+    //flat joins array of arrays into one single array
+    const allColors = this.props.palettes.map((p) => p.colors).flat();
+    //console.log(allColors); //PROBLEM: If there is no saved palette then this allColors is []
+    const rand = Math.floor(Math.random() * allColors.length);
+    const randomColor = allColors[rand];
+    const randomColorAlreadyExist = this.state.colors.filter(
+      (color) => color.name === randomColor.name
+    );
+    //console.log(randomColor.name, randomColorAlreadyExist);
+    if (randomColorAlreadyExist.length === 0)
+      this.setState({ colors: [...this.state.colors, randomColor] });
+    else alert("Escaped from adding existing color: " + randomColor.name);
+  };
+*/
+
+  //  THIS IS THE FINAL BEST SOLUTION TO PREVENT ADDING SAME COLORS RANDOMLY
+  addRandomColor = () => {
+    //pick random color from existing Palettes
+    //flat joins array of arrays into one single array
+    const allColors = this.props.palettes.map((p) => p.colors).flat();
+    //console.log(allColors); //PROBLEM: If there is no saved palette then this allColors is []
+    let rand;
+    let randomColor;
+    let isRandomColorAlreadyExist = true;
+    while (isRandomColorAlreadyExist) {
+      rand = Math.floor(Math.random() * allColors.length);
+      randomColor = allColors[rand];
+      isRandomColorAlreadyExist = this.state.colors.some(
+        (color) => color.name === randomColor.name
+      );
+      //console.log(randomColor);
+    }
     this.setState({ colors: [...this.state.colors, randomColor] });
   };
 

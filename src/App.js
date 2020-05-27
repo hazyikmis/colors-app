@@ -95,7 +95,11 @@ class App extends Component {
                     <Page>
                       <NewPaletteForm
                         savePalette={this.savePalette}
-                        palettes={this.state.palettes} //this whole list required for validating new palette name, checking if the new name exists
+                        palettes={
+                          this.state.palettes.length > 0
+                            ? this.state.palettes
+                            : seedColors
+                        } //this whole list required for validating new palette name, checking if the new name exists
                         {...routeProps}
                       />
                     </Page>
@@ -155,6 +159,18 @@ class App extends Component {
                           //but somehow we will extract required data (shades for only one color) in the SingleColorPalette.js
                           this.findPalette(routeProps.match.params.paletteId)
                         )}
+                      />
+                    </Page>
+                  )}
+                />
+                <Route
+                  //for all unknown routes, show root route
+                  render={(routeProps) => (
+                    <Page>
+                      <PaletteList
+                        palettes={this.state.palettes}
+                        removePalette={this.removePalette}
+                        {...routeProps}
                       />
                     </Page>
                   )}

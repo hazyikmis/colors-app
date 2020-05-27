@@ -118,7 +118,6 @@ export default class PaletteMetaForm extends Component {
               </Button>
               <Button
                 variant="contained"
-                color="primary"
                 //onClick={this.savePalette}
                 type="submit"
                 color="primary"

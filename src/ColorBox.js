@@ -4,11 +4,14 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 //import chroma from "chroma-js";
 
 import { withStyles } from "@material-ui/core/styles";
-import "./ColorBox.css";
-
-import styles from "./styles/ColorBoxStyles";
-
+//import classNames from "classnames";
 import clsx from "clsx";
+//classnames ==? clsx: here is the answer:
+//A tiny (229B) utility for constructing className strings conditionally.
+//Also serves as a faster & smaller drop-in replacement for the classnames module.import classNames from "classnames";
+
+//import "./ColorBox.css";
+import styles from "./styles/ColorBoxStyles";
 
 //JSS: conditional styling
 //with this method, we are checking luminance once, not conditionally in each text

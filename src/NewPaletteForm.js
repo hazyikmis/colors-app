@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import clsx from "clsx";
 //import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -9,13 +8,10 @@ import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 //import { withStyles, withTheme } from "@material-ui/styles";
 import { withStyles } from "@material-ui/core/styles";
-
 import Button from "@material-ui/core/Button";
 //import DraggableColorBox from "./DraggableColorBox"; //moved to inside DraggableColorList.js
-
 import DraggableColorList from "./DraggableColorList";
 import { arrayMove } from "react-sortable-hoc";
-
 import NewPaletteFormNav from "./NewPaletteFormNav";
 import NewPaletteFormColorPicker from "./NewPaletteFormColorPicker";
 

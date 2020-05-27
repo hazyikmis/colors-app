@@ -1,12 +1,8 @@
 import React, { Component } from "react";
-
 import { ChromePicker } from "react-color";
-
 import Button from "@material-ui/core/Button";
 //import DraggableColorBox from "./DraggableColorBox"; //moved to inside DraggableColorList.js
-
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-
 import { withStyles } from "@material-ui/core/styles";
 
 import styles from "./styles/NewPaletteFormColorPickerStyles";

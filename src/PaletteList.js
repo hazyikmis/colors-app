@@ -1,14 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
 import { withStyles } from "@material-ui/core/styles";
-
-import MiniPalette from "./MiniPalette";
-
-import styles from "./styles/PaletteListStyles";
-
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-
 //dialog form imports -begin
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -22,6 +15,9 @@ import CloseIcon from "@material-ui/icons/Close";
 import blue from "@material-ui/core/colors/blue";
 import red from "@material-ui/core/colors/red";
 //dialog form imports -end
+
+import MiniPalette from "./MiniPalette";
+import styles from "./styles/PaletteListStyles";
 
 //The styles below moved to a separate file src/PaletteListStyles.js AND imported here as "styles"
 /*

@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
 //import classNames from "classnames";
 import clsx from "clsx";
 //classnames ==? clsx: here is the answer:
 //A tiny (229B) utility for constructing className strings conditionally.
 //Also serves as a faster & smaller drop-in replacement for the classnames module.import classNames from "classnames";
-
 //import { makeStyles, useTheme } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
@@ -15,20 +13,14 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 //import MenuIcon from "@material-ui/icons/Menu"; //replaced with AddToPhotosIcon
 //import { withStyles, withTheme } from "@material-ui/styles";
-
 import Button from "@material-ui/core/Button";
 //import DraggableColorBox from "./DraggableColorBox"; //moved to inside DraggableColorList.js
-
 //moved to PaletteMetaForm.js
 //import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-
 import { withStyles } from "@material-ui/core/styles";
-
-import PaletteMetaForm from "./PaletteMetaForm";
-
-import styles from "./styles/NewPaletteFormNavStyles";
-
 import AddToPhotosIcon from "@material-ui/icons/AddToPhotos";
+import PaletteMetaForm from "./PaletteMetaForm";
+import styles from "./styles/NewPaletteFormNavStyles";
 
 /*
 //moved to styles/NewPaletteFormNavStyles.js
@@ -80,7 +72,7 @@ class NewPaletteFormNav extends Component {
       handleDrawerOpen,
       palettes,
     } = this.props;
-    //const { newPaletteName } = this.state;
+    const { /*newPaletteName, */ formDialogShowing } = this.state;
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -162,7 +154,7 @@ class NewPaletteFormNav extends Component {
           </div>
         </AppBar>
 
-        {this.state.formDialogShowing && (
+        {formDialogShowing && (
           <PaletteMetaForm
             //handleChange={this.handleChange}
             handleSavePalette={handleSave}

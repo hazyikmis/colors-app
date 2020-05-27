@@ -1,9 +1,8 @@
 import React, { PureComponent } from "react";
 import { withStyles } from "@material-ui/core/styles";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 import styles from "./styles/MiniPaletteStyles";
-
-import DeleteIcon from "@material-ui/icons/Delete";
 
 //The styles below moved to a separate file src/MiniPaletteStyles.js AND imported here as "styles"
 /*

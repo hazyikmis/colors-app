@@ -1,16 +1,14 @@
 import React, { Component } from "react";
-
 import { Route, Switch } from "react-router-dom";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import Palette from "./Palette";
-import seedColors from "./seedColors";
-import { generatePalette } from "./colorHelpers";
-
 import PaletteList from "./PaletteList";
 import SingleColorPalette from "./SingleColorPalette";
 import NewPaletteForm from "./NewPaletteForm";
 
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import seedColors from "./seedColors";
+import { generatePalette } from "./colorHelpers";
 
 //import "./App.css"; //removed, because all styling about "Page" moved to the Page.css
 

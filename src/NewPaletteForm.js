@@ -278,6 +278,7 @@ class NewPaletteForm extends Component {
             removeColor={this.removeColor}
             axis="xy" //draggable both horizontal & vertical
             onSortEnd={this.onSortEnd}
+            distance={20} //drag is not counted as a drag movement unless it is more than 20px
           />
         </main>
       </div>

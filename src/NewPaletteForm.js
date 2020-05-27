@@ -37,7 +37,8 @@ class NewPaletteForm extends Component {
       open: true,
       //currentColor: "teal",  //moved to NewPaletteFormColorPicker.js
       //colors: [{ color: "blue", name: "blue" }],
-      colors: props.palettes[0].colors, //this.props. also works //loading initial palette as using index 0 palette as a template
+      //colors: props.palettes[0].colors, //this.props. also works //loading initial palette as using index 0 palette as a template
+      colors: props.palettes[0] ? props.palettes[0].colors : [],
       //newColorName: "", //moved to NewPaletteFormColorPicker.js
       newPaletteName: "",
     };

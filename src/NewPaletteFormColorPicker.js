@@ -67,7 +67,11 @@ class NewPaletteFormColorPicker extends Component {
           className={classes.picker}
         />
         {/* <ValidatorForm onSubmit={this.addNewColor}> */}
-        <ValidatorForm onSubmit={this.handleSubmit} ref="form">
+        <ValidatorForm
+          onSubmit={this.handleSubmit}
+          ref="form"
+          instantValidate={false}
+        >
           <TextValidator
             value={newColorName}
             name="newColorName" //required for single "handleChange" event for all

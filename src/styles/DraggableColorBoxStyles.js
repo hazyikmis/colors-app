@@ -1,3 +1,5 @@
+import chroma from "chroma-js";
+
 import sizes from "./sizes";
 
 //const styles = {
@@ -37,7 +39,12 @@ export default {
     left: "0px",
     bottom: "0px",
     padding: "10px",
-    color: "rgba(0,0,0, 0.5)",
+    //color: "rgba(0,0,0, 0.5)",  //this always adds the new ColorBox with black color
+    //we have checked the props of DraggableColorBox.js and see that "color" is the background color
+    color: (props) =>
+      chroma(props.color).luminance() <= 0.1
+        ? "rgba(255,255,255, 0.5)"
+        : "rgba(0,0,0, 0.5)",
     letterSpacing: "1px",
     textTransform: "uppercase",
     fontSize: "12px",

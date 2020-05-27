@@ -10,6 +10,10 @@ import PaletteList from "./PaletteList";
 import SingleColorPalette from "./SingleColorPalette";
 import NewPaletteForm from "./NewPaletteForm";
 
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+
+import "./App.css";
+
 //<Palette palette={seedColors[4]} />
 //<Palette {...seedColors[4]} />
 
@@ -67,70 +71,92 @@ class App extends Component {
   render() {
     //console.log(generatePalette(seedColors[4]));
     //<Route exact path="/" render={() => <h1>Palette List</h1>} />
+
+    //In order to use TransitionGroup & CSSTransition; we have created another Route outside of Switch,
+    //And wrapped everything (Switch) inside these two components, we have also used "location" routeProps
+    //Additionally, for smooth fade effect, we have wrapped each rendered component with a div with className="page"
+    //we have added this class into the App.css
+
     return (
-      <Switch>
-        <Route
-          exact
-          path="/palette/new"
-          //render={() => <NewPaletteForm savePalette={this.savePalette} />}
-          render={(routeProps) => (
-            <NewPaletteForm
-              savePalette={this.savePalette}
-              palettes={this.state.palettes} //this whole list required for validating new palette name, checking if the new name exists
-              {...routeProps}
-            />
-          )}
-        />
-        <Route
-          exact
-          path="/"
-          //render={() => <PaletteList palettes={seedColors} />}
-          //since, we have started to use "history.push" in the PaletteList.js we need to pass routeProps
-          render={(routeProps) => (
-            //<PaletteList palettes={seedColors} {...routeProps} />
-            <PaletteList
-              palettes={this.state.palettes}
-              removePalette={this.removePalette}
-              {...routeProps}
-            />
-          )}
-        />
-        {/*
+      <Route
+        render={({ location }) => (
+          <TransitionGroup>
+            <CSSTransition key={location.key} classNames="fade" timeout={500}>
+              <Switch location={location}>
+                <Route
+                  exact
+                  path="/palette/new"
+                  //render={() => <NewPaletteForm savePalette={this.savePalette} />}
+                  render={(routeProps) => (
+                    <div className="page">
+                      <NewPaletteForm
+                        savePalette={this.savePalette}
+                        palettes={this.state.palettes} //this whole list required for validating new palette name, checking if the new name exists
+                        {...routeProps}
+                      />
+                    </div>
+                  )}
+                />
+                <Route
+                  exact
+                  path="/"
+                  //render={() => <PaletteList palettes={seedColors} />}
+                  //since, we have started to use "history.push" in the PaletteList.js we need to pass routeProps
+                  render={(routeProps) => (
+                    //<PaletteList palettes={seedColors} {...routeProps} />
+                    <div className="page">
+                      <PaletteList
+                        palettes={this.state.palettes}
+                        removePalette={this.removePalette}
+                        {...routeProps}
+                      />
+                    </div>
+                  )}
+                />
+                {/*
         <Route
           exact
           path="/palette/:id"
           render={() => <h1>Individual Palette</h1>}
         />
         */}
-        {/* we need to take this "id", retrieve palette data from seedColors and generate palette and finally call Palette component  */}
-        {/* IMPORTANT!!!: Below you can see the very clever way of using "routeProps", instantly accessing "id" in the route and using it when calling a method */}
-        <Route
-          exact
-          path="/palette/:id"
-          render={(routeProps) => (
-            <Palette
-              palette={generatePalette(
-                this.findPalette(routeProps.match.params.id)
-              )}
-            />
-          )}
-        />
-        {/* <Route path="/palette/:paletteId/:colorId" render={() => <h1>single color page</h1>} /> */}
-        {/* <Route path="/palette/:paletteId/:colorId" render={() => <SingleColorPalette />} /> */}
-        <Route
-          path="/palette/:paletteId/:colorId"
-          render={(routeProps) => (
-            <SingleColorPalette
-              colorId={routeProps.match.params.colorId}
-              palette={generatePalette(
-                //this is too much data sending, no need to send all palette
-                //but somehow we will extract required data (shades for only one color) in the SingleColorPalette.js
-                this.findPalette(routeProps.match.params.paletteId)
-              )}
-            />
-          )}
-        />
-      </Switch>
+                {/* we need to take this "id", retrieve palette data from seedColors and generate palette and finally call Palette component  */}
+                {/* IMPORTANT!!!: Below you can see the very clever way of using "routeProps", instantly accessing "id" in the route and using it when calling a method */}
+                <Route
+                  exact
+                  path="/palette/:id"
+                  render={(routeProps) => (
+                    <div className="page">
+                      <Palette
+                        palette={generatePalette(
+                          this.findPalette(routeProps.match.params.id)
+                        )}
+                      />
+                    </div>
+                  )}
+                />
+                {/* <Route path="/palette/:paletteId/:colorId" render={() => <h1>single color page</h1>} /> */}
+                {/* <Route path="/palette/:paletteId/:colorId" render={() => <SingleColorPalette />} /> */}
+                <Route
+                  path="/palette/:paletteId/:colorId"
+                  render={(routeProps) => (
+                    <div className="page">
+                      <SingleColorPalette
+                        colorId={routeProps.match.params.colorId}
+                        palette={generatePalette(
+                          //this is too much data sending, no need to send all palette
+                          //but somehow we will extract required data (shades for only one color) in the SingleColorPalette.js
+                          this.findPalette(routeProps.match.params.paletteId)
+                        )}
+                      />
+                    </div>
+                  )}
+                />
+              </Switch>
+            </CSSTransition>
+          </TransitionGroup>
+        )}
+      ></Route>
 
       //<div>
       //  <Palette palette={generatePalette(seedColors[4])} />

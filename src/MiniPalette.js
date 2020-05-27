@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import { withStyles } from "@material-ui/core/styles";
 
 import styles from "./styles/MiniPaletteStyles";
@@ -18,7 +18,7 @@ const styles = {
 
 //In order to add deletePalette event handler, we have changed this component from function to class
 //function MiniPalette(props) {
-class MiniPalette extends React.Component {
+class MiniPalette extends PureComponent {
   //actually we are deleting the palette in the App.js, because all state and localStorage manipulated over there!
   deletePalette = (e) => {
     e.stopPropagation();
@@ -27,9 +27,23 @@ class MiniPalette extends React.Component {
     this.props.openDeleteDialog(this.props.id);
   };
 
+  handleClick = () => {
+    this.props.goToPalette(this.props.id);
+  };
+
   render() {
-    const { classes, paletteName, emoji, colors, handleClick } = this.props;
+    //const { classes, paletteName, emoji, colors, handleClick } = this.props;
+    //const { classes, paletteName, emoji, colors, goToPalette, id } = this.props;
+    const { classes, paletteName, emoji, colors } = this.props;
+
     //console.log(classes);
+    console.log("RENDERING Mini Palette:", paletteName);
+    //This component changed to PureComponent, but it still re-renders
+    //Because one of the props (handleClick) is changed every time
+    //Since this prop sent as handleClick={() => this.goToPalette(palette.id)}
+    //Please check from PaletteList.js
+    //If we change it
+
     const miniColorBoxes = colors.map((color) => (
       <div
         className={classes.miniColor}
@@ -39,7 +53,13 @@ class MiniPalette extends React.Component {
     ));
 
     return (
-      <div className={classes.root} onClick={handleClick}>
+      //</div><div className={classes.root} onClick={handleClick}>
+      //we have changed parent component's how to send handleClick props
+      //and here we calling inline function AND THIS IS NOT AFFECTING this component's being PureComponent
+      //PS: handleClick changed to goToPalette
+      //<div className={classes.root} onClick={() => goToPalette(id)}>
+      //Maybe its better to create a method and call it onClick
+      <div className={classes.root} onClick={this.handleClick}>
         <DeleteIcon
           className={classes.deleteIcon}
           //inline style used for overcoming css specifity problem

@@ -76,13 +76,14 @@ class PaletteList extends Component {
     this.setState({ openDeleteDialog: false, deletingId: "" });
   };
 
-  //goToPalette = (id) => {  //NO DIFFERENCE
-  goToPalette(id) {
-    console.log("JJI");
+  //goToPalette = (id) => {  //NO DIFFERENCE (At the beginning, but now its important)
+  //goToPalette(id) {
+  goToPalette = (id) => {
+    //console.log("JJI");
     //since we have used history, "PaletteList" component should NOT be called with render in the App.js
     //or, if we still want to use render, then "routeProps" should be sent as argument to PaletteList component
     this.props.history.push(`palette/${id}`);
-  }
+  };
 
   handleDelete = () => {
     this.props.removePalette(this.state.deletingId);
@@ -120,7 +121,8 @@ class PaletteList extends Component {
               <CSSTransition key={palette.id} classNames="fade" timeout={500}>
                 <MiniPalette
                   {...palette}
-                  handleClick={() => this.goToPalette(palette.id)}
+                  //handleClick={() => this.goToPalette(palette.id)} //this prevents MiniPalette behave as a PureComponent
+                  goToPalette={this.goToPalette} //this causes to change the definition of goToPalette from normal to arrow-function
                   //handleDelete={removePalette}
                   //handleDelete={this.openDialog}
                   openDeleteDialog={this.openDialog}

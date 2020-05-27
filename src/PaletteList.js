@@ -7,6 +7,8 @@ import MiniPalette from "./MiniPalette";
 
 import styles from "./styles/PaletteListStyles";
 
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+
 //The styles below moved to a separate file src/PaletteListStyles.js AND imported here as "styles"
 /*
 const styles = {
@@ -66,17 +68,36 @@ class PaletteList extends Component {
             <h1 className={classes.heading}>Palette List</h1>
             <Link to="/palette/new">Create New Palette</Link>
           </nav>
-          <div className={classes.palettes}>
+
+          {/* below, you can find how mini palettes rendered without using react-transition-group */}
+          {/* <div className={classes.palettes}>
+              {palettes.map((palette) => (
+                <MiniPalette
+                  {...palette}
+                  handleClick={() => this.goToPalette(palette.id)}
+                  handleDelete={removePalette}
+                  key={palette.id}
+                  id={palette.id}
+                />
+              ))}
+          </div> */}
+
+          {/* when TransitionGroup added just inside this div, it creates another div, so we cannot use classes.palettes. So, its better to remove that div */}
+          {/* <div className={classes.palettes}> */}
+          <TransitionGroup className={classes.palettes}>
             {palettes.map((palette) => (
-              <MiniPalette
-                {...palette}
-                handleClick={() => this.goToPalette(palette.id)}
-                handleDelete={removePalette}
-                key={palette.id}
-                id={palette.id}
-              />
+              <CSSTransition key={palette.id} classNames="fade" timeout={500}>
+                <MiniPalette
+                  {...palette}
+                  handleClick={() => this.goToPalette(palette.id)}
+                  handleDelete={removePalette}
+                  key={palette.id}
+                  id={palette.id}
+                />
+              </CSSTransition>
             ))}
-          </div>
+          </TransitionGroup>
+          {/* </div> */}
         </div>
       </div>
     );

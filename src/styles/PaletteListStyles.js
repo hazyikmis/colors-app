@@ -4,6 +4,16 @@ import sizes from "./sizes";
 import bg2 from "./bg2.svg";
 
 export default {
+  //@global used for defining css classes globally, accessible from all js files!
+  "@global": {
+    ".fade-exit": {
+      opacity: 1,
+    },
+    ".fade-exit-active": {
+      opacity: 0,
+      transition: "opacity 500ms ease-out",
+    },
+  },
   root: {
     //backgroundColor: "blue",
     height: "100vh",

@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
+//import classNames from "classnames";
 import clsx from "clsx";
+//classnames ==? clsx: here is the answer:
+//A tiny (229B) utility for constructing className strings conditionally.
+//Also serves as a faster & smaller drop-in replacement for the classnames module.import classNames from "classnames";
+
 //import { makeStyles, useTheme } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
@@ -99,7 +104,9 @@ class NewPaletteFormNav extends Component {
               //   [classes.class2]: open && xxx,
               //   [classes.class3]: !yyy,
               // })}
-              className={clsx(classes.menuButton, { [classes.hide]: open })}
+              className={clsx(classes.menuButton, {
+                [classes.hide]: open,
+              })}
             >
               <AddToPhotosIcon />
             </IconButton>

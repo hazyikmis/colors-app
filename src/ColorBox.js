@@ -8,6 +8,8 @@ import "./ColorBox.css";
 
 import styles from "./styles/ColorBoxStyles";
 
+import clsx from "clsx";
+
 //JSS: conditional styling
 //with this method, we are checking luminance once, not conditionally in each text
 //The styles below moved to a separate file src/ColorBoxStyles.js AND imported here as "styles"
@@ -57,13 +59,17 @@ class ColorBox extends Component {
           {/* The secret div below is the div gets shown hugely and covers the screen when a ColorBox clicked */}
           <div
             //className={`copy-overlay ${copied && "show"}`}
-            className={`${classes.copyOverlay} ${
-              copied && classes.showOverlay
-            }`}
+            // className={`${classes.copyOverlay} ${
+            //   copied && classes.showOverlay
+            // }`}
+            className={clsx(classes.copyOverlay, {
+              [classes.showOverlay]: copied,
+            })}
             style={{ background }}
           />
           {/* The another secret div below is the div contains the "Copied" message and color rgb info */}
-          <div className={`${classes.copyMsg} ${copied && classes.showMsg}`}>
+          {/* <div className={`${classes.copyMsg} ${copied && classes.showMsg}`}> */}
+          <div className={clsx(classes.copyMsg, { [classes.showMsg]: copied })}>
             <h1>Copied!</h1>
             {/* <p className={`${isLightColor && "dark-text"}`}>{background}</p> */}
             <p className={classes.copyText}>{background}</p>

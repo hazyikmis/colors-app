@@ -5,3 +5,5 @@ All css styling code moved into the component js files as "styles" constants. Th
 As a result, we do not need .css files. (except App.css & index.css)
 
 Drag & Drop: https://www.udemy.com/course/modern-react-bootcamp/learn/lecture/14384782
+
+In this project no hooks used!
